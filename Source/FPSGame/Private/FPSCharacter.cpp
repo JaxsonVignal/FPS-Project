@@ -11,6 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Animation/AnimSequence.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "FPSGameMode.h"
 
 AFPSCharacter::AFPSCharacter()
 {
@@ -175,10 +176,16 @@ void AFPSCharacter::Die()
 	GetCharacterMovement()->DisableMovement();
 	GetCharacterMovement()->StopMovementImmediately();
 
-	// Restart the level immediately
-	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()));
-}
+	// Show game over screen instead of immediately restarting
+	AFPSGameMode* GameMode = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
+	if (GameMode)
+	{
+		GameMode->ShowGameOver();
+	}
 
+	// Optional: Add a delay before restarting, or remove auto-restart entirely
+	// You can handle restart from the game over widget instead
+}
 float AFPSCharacter::GetHealthPercentage() const
 {
 	return MaxHealth > 0.0f ? CurrentHealth / MaxHealth : 0.0f;

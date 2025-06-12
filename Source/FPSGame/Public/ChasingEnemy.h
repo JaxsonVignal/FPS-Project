@@ -1,8 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ChasingEnemy.h
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Engine/Engine.h"
 #include "ChasingEnemy.generated.h"
 
 UCLASS()

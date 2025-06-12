@@ -1,4 +1,3 @@
-// FPSGameMode.h
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
@@ -19,11 +18,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetScore() const { return Score; }
 
+	// Add game over function
+	UFUNCTION(BlueprintCallable)
+	void ShowGameOver();
+
 protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UUserWidget> ScoreWidgetClass;
+
+	// Add Game Over Widget class
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> GameOverWidgetClass;
 
 private:
 	// Add score tracking
@@ -36,8 +43,9 @@ private:
 	UPROPERTY()
 	class UTextBlock* ScoreText;
 
+	// Add Game Over Widget
+	UPROPERTY()
+	class UUserWidget* GameOverWidget;
+
 	void UpdateScoreDisplay();
 };
-
-
-
